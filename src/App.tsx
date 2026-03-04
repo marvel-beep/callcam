@@ -42,9 +42,15 @@ export default function App() {
     setIsLoading(true);
     setError(null);
     try {
-      const solution = await solveMathProblem(base64Image, 'image/jpeg');
+      // Extract mime type from base64 string
+      const mimeTypeMatch = base64Image.match(/data:(.*);base64/);
+      const mimeType = mimeTypeMatch ? mimeTypeMatch[1] : 'image/jpeg';
+      
+      console.log("Processing image with mimeType:", mimeType);
+      const solution = await solveMathProblem(base64Image, mimeType);
       setResult(solution);
     } catch (err) {
+      console.error("Process image error:", err);
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
       setIsLoading(false);
