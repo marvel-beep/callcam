@@ -1,9 +1,13 @@
 import { GoogleGenAI, GenerateContentResponse } from "@google/genai";
 
-const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY || "" });
-
 export async function solveMathProblem(base64Image: string, mimeType: string): Promise<string> {
   try {
+    const apiKey = process.env.GEMINI_API_KEY || "";
+    if (!apiKey) {
+      throw new Error("API Key is missing. Please configure GEMINI_API_KEY.");
+    }
+    
+    const ai = new GoogleGenAI({ apiKey });
     const response: GenerateContentResponse = await ai.models.generateContent({
       model: "gemini-3-flash-preview",
       contents: [
@@ -11,7 +15,7 @@ export async function solveMathProblem(base64Image: string, mimeType: string): P
           parts: [
             {
               inlineData: {
-                data: base64Image.split(",")[1], // Remove the data:image/png;base64, prefix
+                data: base64Image.split(",")[1],
                 mimeType: mimeType,
               },
             },
@@ -26,6 +30,6 @@ export async function solveMathProblem(base64Image: string, mimeType: string): P
     return response.text || "Sorry, I couldn't solve this problem.";
   } catch (error) {
     console.error("Error solving math problem:", error);
-    throw new Error("Failed to process image. Please try again.");
+    throw error;
   }
 }

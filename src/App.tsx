@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Camera as CameraIcon, Upload, Calculator, Loader2, Sparkles, Image as ImageIcon } from 'lucide-react';
+import { Camera as CameraIcon, Upload, Calculator, Loader2, Sparkles, Image as ImageIcon, X as XIcon } from 'lucide-react';
 import { Camera } from './components/Camera';
 import { MathResult } from './components/MathResult';
 import { solveMathProblem } from './services/gemini';
@@ -177,7 +177,7 @@ export default function App() {
               className="w-full max-w-md bg-red-50 p-8 rounded-3xl border border-red-100 text-center"
             >
               <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
-                <X size={32} />
+                <XIcon size={32} />
               </div>
               <h3 className="text-xl font-bold text-red-900 mb-2">Oops! Something went wrong</h3>
               <p className="text-red-700 mb-6">{error}</p>
