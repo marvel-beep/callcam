@@ -180,16 +180,28 @@ export default function App() {
               key="error"
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
-              className="w-full max-w-md bg-red-50 p-8 rounded-3xl border border-red-100 text-center"
+              className="w-full max-w-md bg-white p-8 rounded-3xl border border-zinc-200 shadow-xl text-center"
             >
               <div className="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
                 <XIcon size={32} />
               </div>
-              <h3 className="text-xl font-bold text-red-900 mb-2">Oops! Something went wrong</h3>
-              <p className="text-red-700 mb-6">{error}</p>
+              <h3 className="text-xl font-bold text-zinc-900 mb-2">Configuration Required</h3>
+              <p className="text-zinc-600 mb-6 text-sm">
+                {error.includes("API Key") ? (
+                  <>
+                    To use CALLCAM, you need to add your <strong>Gemini API Key</strong> to the environment:
+                    <ol className="text-left mt-4 space-y-2 list-decimal list-inside bg-zinc-50 p-4 rounded-xl border border-zinc-100">
+                      <li>Open the <strong>Secrets</strong> panel in AI Studio.</li>
+                      <li>Add a new secret named <code>GEMINI_API_KEY</code>.</li>
+                      <li>Paste your API key from <a href="https://aistudio.google.com/app/apikey" target="_blank" className="text-emerald-600 underline">AI Studio API Keys</a>.</li>
+                      <li>Refresh this page.</li>
+                    </ol>
+                  </>
+                ) : error}
+              </p>
               <button
                 onClick={reset}
-                className="w-full py-3 bg-red-600 text-white rounded-2xl font-bold hover:bg-red-700 transition-colors"
+                className="w-full py-3 bg-zinc-900 text-white rounded-2xl font-bold hover:bg-zinc-800 transition-colors"
               >
                 Try Again
               </button>
