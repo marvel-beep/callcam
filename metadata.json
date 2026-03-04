@@ -1,0 +1,7 @@
+{
+  "name": "CALLCAM",
+  "description": "Calculator Camera - Solve math problems instantly by taking a photo or uploading an image.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
